@@ -9,10 +9,12 @@ module Osheet
     include StyledElement
     include MarkupElement
 
-    def initialize(workbook=nil, worksheet=nil, *args, &block)
+    def initialize(data=nil, workbook=nil, worksheet=nil, *args, &block)
+      set_ivar(:data, data)
+#    def initialize(workbook=nil, worksheet=nil, *args, &block)
+#      set_ivar(:data, nil)
       set_ivar(:workbook, workbook)
       set_ivar(:worksheet, worksheet)
-      set_ivar(:data, nil)
       set_ivar(:format, Format.new(:general))
       set_ivar(:rowspan, 1)
       set_ivar(:colspan, 1)

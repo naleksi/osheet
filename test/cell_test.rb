@@ -24,6 +24,11 @@ module Osheet
       assert_equal nil,   subject.send(:get_ivar, "formula")
     end
 
+    should "use data correctly as a reasonable first argument" do
+      cell = Cell.new(123)
+      assert_equal 123, cell.send(:get_ivar, "data")
+    end
+
     should "type cast data strings/symbols" do
       ['a string', :symbol].each do |thing|
         cell = Cell.new{data thing}

@@ -36,7 +36,13 @@ module Osheet::Associations
             klass.new(self.workbook, worksheet, *args[1..-1], &template)
           else
             # add by block
-            klass.new(self.workbook, worksheet, &block)
+            if not self.respond_to?(:row)
+              # creating: column, row
+              klass.new(self.workbook, worksheet, &block)
+            else
+              # creating: cell
+              klass.new(nil, self.workbook, worksheet, &block)
+            end
           end
         else
           # on: workbook
